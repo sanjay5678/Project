@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://www.login2explore.com/jpdb/resources/js/0.0.3/jpdb-commons.js"></script>
+    <style>
+        .sanju{
+            margin:30px;
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        function saveDetails(){
+            var jsonStr=validateAndGetFormData();
+            if(jsonStr===""){
+                return;
+            }
+            var putReq= createPUTRequest("90939119|-31949286133833914|90946524",jsonStr,"Employee","ksonPower");
+            alert(putReq);
+            jQuery.ajaxSetup({async:false});
+            var resultObj=executeCommand(putReq,"/api/iml");
+            jQuery.ajaxSetup({async:true});
+            alert(JSON.stringify(resultObj));
+            resetForm();
+        }
+
+        function validateAndGetFormData(){
+            var nameVar=$("#sanju1").val();
+            if(nameVar===""){
+                alert("name is Empty");
+                $("#sanju1").focus();
+                return "";
+            }
+            var emailVar=$("#sanju2").val();
+            if(emailVar===""){
+                alert("Email is Empty");
+                $("#sanju2").focus();
+                return "";
+            }
+            var mobileVar=$("#sanju3").val();
+            if(mobileVar===""){
+                alert("Ph no is Empty");
+                $("#sanju3").focus();
+                return "";
+            }
+            var addressVar=$("#sanju4").val();
+            if(addressVar===""){
+                alert("Address is Empty");
+                $("#sanju4").focus();
+                return "";
+            }
+            var rateVar=$("#sanju5").val();
+            if(rateVar===""){
+                alert("You did'nt give any rating");
+                $("#sanju5").focus();
+                return "";
+            }
+            var jsonStrObj={
+                name:nameVar,
+                email:emailVar,
+                mobile:mobileVar,
+                address:addressVar,
+                rate:rateVar
+            }
+            return JSON.stringify(jsonStrObj);
+        }
+    </script>
+</head>
+<i>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Take the Survey</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Change Review</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Check your Review</a>
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+    <br><br><center>
+    <h2>Take the survey</h2><br>
+    <div class="sanju">
+    <div class="input-group flex-nowrap">
+        <span class="input-group-text" >Name</span>
+        <input type="text" class="form-control" id="sanju1" placeholder="Enter your Name" aria-label="Username" aria-describedby="addon-wrapping">
+    </div>
+    <br>
+    <div class="input-group flex-nowrap">
+        <span class="input-group-text" >Email</span>
+        <input type="text" class="form-control" id="sanju2" placeholder="example@email.com" aria-label="Username" aria-describedby="addon-wrapping">
+    </div>
+    <br>
+    <div class="input-group flex-nowrap">
+        <span class="input-group-text" >Mobile</span>
+        <input type="text" class="form-control" id="sanju3" placeholder="+XX XXXXXXXXXX" aria-label="Username" aria-describedby="addon-wrapping">
+    </div>
+    <br>
+    <div class="input-group flex-nowrap">
+        <span class="input-group-text" >Address</span>
+        <input type="text" class="form-control" id="sanju4" placeholder="....." aria-label="Username" aria-describedby="addon-wrapping">
+    </div>
+    <br>
+    <div class="input-group flex-nowrap">
+        <span class="input-group-text" >Rate the site</span>
+        <input type="text" class="form-control" id="sanju5" placeholder="/10" aria-label="Username" aria-describedby="addon-wrapping">
+    </div><br>
+    <button type="button" class="btn btn-primary btn-lg" onclick="saveDetails()">Submit</button>
+    <br></center>
+</div>
+</body>
+</html>
